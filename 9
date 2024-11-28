@@ -1,0 +1,79 @@
+In Python, polymorphism refers to the ability of different objects to respond to the same method in different ways. Python provides polymorphism through method overriding (in classes) and function overloading (through techniques like default parameters or variable-length arguments). Python does not support traditional function overloading (as in C++ or Java), but similar functionality can be achieved using default arguments or the *args syntax.
+
+Let's break down how you can implement function overloading using both default parameter values and variable-length argument lists.
+
+1. Function Overloading with Default Parameter Values
+In Python, you can define a function with default values for parameters, and this allows you to call the function with different numbers of arguments. If the caller does not provide a value for the parameter, the default value is used.
+
+Here is an example of function overloading using default parameters:
+
+python
+Copy code
+# Function overloading using default parameter values
+def add(a, b=0, c=0):
+    return a + b + c
+
+# Demonstrating function overloading
+print(add(1))         # Output: 1  (a = 1, b = 0, c = 0)
+print(add(1, 2))      # Output: 3  (a = 1, b = 2, c = 0)
+print(add(1, 2, 3))   # Output: 6  (a = 1, b = 2, c = 3)
+Explanation:
+When add(1) is called, only the first parameter a is passed, and the default values b=0 and c=0 are used, resulting in 1 + 0 + 0 = 1.
+When add(1, 2) is called, a=1 and b=2 are provided, and c=0 (the default) is used, resulting in 1 + 2 + 0 = 3.
+When add(1, 2, 3) is called, all three parameters are passed, so the function computes 1 + 2 + 3 = 6.
+2. Function Overloading with Variable-Length Arguments (*args)
+Another way to simulate function overloading in Python is by using variable-length argument lists. The special syntax *args allows you to pass any number of positional arguments to a function. This way, you can handle different numbers of arguments dynamically.
+
+Here’s an example of function overloading using *args:
+
+python
+Copy code
+# Function overloading using variable-length argument lists
+def add(*args):
+    return sum(args)
+
+# Demonstrating function overloading with *args
+print(add(1))            # Output: 1
+print(add(1, 2))         # Output: 3
+print(add(1, 2, 3))      # Output: 6
+print(add(1, 2, 3, 4))   # Output: 10
+print(add(1, 2, 3, 4, 5)) # Output: 15
+Explanation:
+When add(1) is called, the args tuple contains (1), and the sum(args) calculates 1.
+When add(1, 2) is called, the args tuple contains (1, 2), and the sum(args) calculates 1 + 2 = 3.
+The function can handle any number of arguments because of the *args syntax. It will sum all the numbers provided, regardless of how many arguments are passed.
+Key Points:
+Function Overloading in Python: Since Python is dynamically typed, traditional function overloading (like in statically-typed languages such as C++ or Java) is not supported. However, you can achieve the same functionality using default parameter values or variable-length arguments.
+Default Parameter Values: You can assign default values to function parameters, making them optional when calling the function.
+Variable-Length Arguments (*args): This allows the function to accept any number of positional arguments, making it flexible to handle different cases dynamically.
+Polymorphism via Overriding (Bonus)
+In addition to overloading, Python supports method overriding for polymorphism, where a subclass can provide a specific implementation of a method already defined in its superclass.
+
+Here’s an example demonstrating polymorphism via method overriding:
+
+python
+Copy code
+class Animal:
+    def speak(self):
+        print("Animal makes a sound")
+
+class Dog(Animal):
+    def speak(self):
+        print("Dog barks")
+
+class Cat(Animal):
+    def speak(self):
+        print("Cat meows")
+
+# Polymorphism demonstration
+animals = [Animal(), Dog(), Cat()]
+
+for animal in animals:
+    animal.speak()  # Calls the appropriate method depending on the object type
+Output:
+css
+Copy code
+Animal makes a sound
+Dog barks
+Cat meows
+In the above code, the method speak() is defined in the superclass Animal but overridden in the Dog and Cat subclasses. When we call animal.speak(), the correct method is called based on the actual object type, which is an example of polymorphism.
